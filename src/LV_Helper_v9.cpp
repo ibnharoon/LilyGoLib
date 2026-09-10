@@ -200,8 +200,8 @@ void beginLvglHelper(LilyGo_Display &board, bool debug)
 
     } else {
         log_d("Using Not DMA pushColors..");
-        // 1/10 screen
-        lv_buffer_size = board.width() * (size_t)(board.height()/10) * sizeof(lv_color16_t);
+        // 1/3 screen
+        lv_buffer_size = board.width() * (size_t)(board.height()/3) * sizeof(lv_color16_t);
         buf = (lv_color16_t *)ps_malloc(lv_buffer_size);
         assert(buf);
         buf1 = (lv_color16_t *)ps_malloc(lv_buffer_size);
