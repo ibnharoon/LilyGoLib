@@ -45,10 +45,10 @@ static void disp_flush( lv_display_t *disp_drv, const lv_area_t *area, uint8_t *
 #endif
 
 #if defined(ARDUINO_T_LORA_PAGER) || defined(ARDUINO_T_WATCH_S3_ULTRA)
-    log_d("x1:%d y1:%d w:%d h:%d", area->x1, area->y1, w, h);
+//    log_d("x1:%d y1:%d w:%d h:%d", area->x1, area->y1, w, h);
     plane->pushColors(area->x1, area->y1, w, h, (uint16_t *)color_p);
 #else
-    log_d("x1:%d y1:%d x2:%d y2:%d", area->x1, area->y1, area->x2 + 1, area->y2 + 1);
+ //   log_d("x1:%d y1:%d x2:%d y2:%d", area->x1, area->y1, area->x2 + 1, area->y2 + 1);
     plane->pushColors(area->x1, area->y1, area->x2 + 1, area->y2 + 1, (uint16_t *)color_p);
 #endif
 
@@ -126,7 +126,7 @@ static uint32_t lv_tick_get_callback(void)
 static void lv_rounder_cb(lv_event_t *e)
 {
     lv_area_t *area = (lv_area_t *)lv_event_get_param(e);
-    log_d("rounder in: x1=%d y1=%d x2=%d y2=%d", area->x1, area->y1, area->x2, area->y2);
+//    log_d("rounder in: x1=%d y1=%d x2=%d y2=%d", area->x1, area->y1, area->x2, area->y2);
 #if defined(ARDUINO_T_WATCH_S3_ULTRA)
     // Limit the starting coordinate of T-Watch-S3-Ultra to 0, otherwise the display will be abnormal
     if (area->x1 > 1)
@@ -145,7 +145,7 @@ static void lv_rounder_cb(lv_event_t *e)
         area->y1--;
     if (!(area->y2 & 1))
         area->y2++;
-    log_d("rounder out: x1=%d y1=%d x2=%d y2=%d", area->x1, area->y1, area->x2, area->y2);
+//    log_d("rounder out: x1=%d y1=%d x2=%d y2=%d", area->x1, area->y1, area->x2, area->y2);
 }
 
 static void lv_res_changed_cb(lv_event_t *e)
@@ -200,8 +200,8 @@ void beginLvglHelper(LilyGo_Display &board, bool debug)
 
     } else {
         log_d("Using Not DMA pushColors..");
-        // 1/3 screen
-        lv_buffer_size = board.width() * (size_t)(board.height()/3) * sizeof(lv_color16_t);
+        // 1/2 screen
+        lv_buffer_size = board.width() * (size_t)(board.height()/2) * sizeof(lv_color16_t);
         buf = (lv_color16_t *)ps_malloc(lv_buffer_size);
         assert(buf);
         buf1 = (lv_color16_t *)ps_malloc(lv_buffer_size);
